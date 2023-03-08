@@ -1,0 +1,75 @@
+Задание:
+1. Подключить дополнительный репозиторий на выбор: Docker, Nginx, Oracle MySQL. Установить любой пакет из этого репозитория.
+
+cd /etc/apt 
+nano /etc/apt/sources.list 
+
+sudo su (для получения прав изменения файла)
+(любым редактором добавили строку от имени рута)
+deb http://nginx.org/packages/ubuntu jammy nginx
+
+curl -fsSL https://nginx.org/keys/nginx_signing.key | sudo apt-key add -
+
+sudo apt update
+sudo apt install nginx -y
+nginx -v   (проверка версии)
+
+
+2. Установить и удалить deb-пакет с помощью dpkg.
+
+Установить
+sudo wget https://download.virtualbox.org/virtualbox/7.0.6/virtualbox-7.0_7.0.6-155176~Ubuntu~jammy_amd64.deb
+
+root@MSX-Linux:/etc/apt# ll
+dpkg -i virtualbox-7.0_7.0.6-155176~Ubuntu~jammy_amd64.deb 
+
+Удалить
+dpkg -r virtualbox-7.0
+dpkg -P virtualbox-7.0
+
+3. Установить и удалить snap-пакет
+
+snap --help
+snap list
+snap find zoom
+snap install zoom-client
+snap list
+snap remove zoom-client
+
+
+4. Добавить задачу для выполнения каждые 3 минуты (создание директории, запись в файл).
+
+crontab -l (посмотреть текущие задания пользователя) 
+
+crontab -e (добавить задание - пропишем * * * * * usr/local/bin/script.sh)
+
+usr/local/bin/script.sh (создадим и пропишим скрипт)
+	#!/bin/bash
+	echo $(date) >> /var/log/testcron.log
+
+sudo chmod ugo+x /usr/local/bin/script.sh
+
+crontab -l (посмотреть текущие задания пользователя) 
+
+sudo cat /var/log/syslog | grep CRON  (показать логи)
+
+crontab -r (удолить все задачи)
+
+
+
+5. * Подключить PPA-репозиторий на выбор. Установить из него пакет. Удалить PPA из системы.
+
+
+
+
+
+
+6. * Создать задачу резервного копирования (tar) домашнего каталога пользователя. Реализовать с использованием пользовательских crontab-файлов.
+
+
+
+
+
+
+Результат:
+Текст команд, которые применялись при выполнении задания. При наличи: часть конфигурационных файлов, которые решают задачу. Присылаем в формате текстового документа: задание и команды для решения (без вывода). Формат - PDF (один файл на все задания).
